@@ -1,35 +1,40 @@
 class DecksController < ApplicationController
+  before_filter :authenticate
+  respond_to :html, :json
+
   def index
-    @decks = Deck.all
+    @decks = current_user.decks
+    respond_with @decks
   end
 
   def show
-    @deck = Deck.find(params[:id])
+    @deck = current_user.decks.where(name: params[:id]).first
+    respond_with @deck
   end
 
   def new
-    @deck = Deck.new
+    @deck = current_user.decks.new
   end
 
   def create
-    @deck = Deck.new(params[:deck])
+    @deck = current_user.decks.new(params[:deck])
     @deck.save
-    redirect_to root_path
+    redirect_to decks_path
   end
 
   def edit
-    @deck = Deck.find(params[:id])
+    @deck = current_user.decks.find(params[:id])
   end
 
   def update
-    @deck = Deck.find(params[:id])
+    @deck = current_user.decks.find(params[:id])
     @deck.update_attributes(params[:deck])
     redirect_to deck_path(@deck)
   end
 
   def destroy
-    @deck = Deck.find(params[:id])
+    @deck = current_user.decks.find(params[:id])
     @deck.destroy
-    redirect_to root_path
+    redirect_to decks_path
   end
 end

@@ -1,0 +1,18 @@
+<%= form_for @user do |form| %>
+  <% if @user.errors.any? %>
+    <h3><%= pluralize @user.errors.messages.count, 'error' %> prevented this user from being saved.</h3>
+    <div>
+      <ul>
+      <% @user.errors.messages.each do |field, messages| %>
+        <% messages.each do |message| %>
+          <li><%= "#{field.capitalize} #{message}." %></li>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <%= form.submit 'Sign up' %>
+<% end %>

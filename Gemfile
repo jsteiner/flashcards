@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'high_voltage'
+gem 'psych'
 gem 'rails', '3.2.13'
 gem 'sqlite3'
-gem 'psych'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

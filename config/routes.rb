@@ -1,4 +1,8 @@
 Flashcards::Application.routes.draw do
-  resources :decks, only: [:show, :new, :create, :destroy, :edit, :update]
-  root to: 'decks#index'
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
+  resources :decks do
+    resources :cards, except: :index
+  end
+  root to: 'high_voltage/pages#show', id: 'home'
 end

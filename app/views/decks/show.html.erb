@@ -1,4 +1,11 @@
 <h1><%= @deck.name %></h1>
 
 <%= link_to 'Edit', edit_deck_path(@deck) %>
-<%= link_to 'Delete', deck_path(@deck), method: :delete, confirm: 'Are you sure?' %>
+<%= link_to 'Delete', @deck, method: :delete, confirm: 'Are you sure?' %>
+
+<%= link_to 'Add a card', new_deck_card_path(@deck) %>
+<ul>
+  <% @deck.cards.each do |card| %>
+    <li><%= link_to card.front, [@deck, card] %></li>
+  <% end %>
+</ul>
